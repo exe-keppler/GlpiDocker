@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  glpi:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - glpi_data:/home/kali/Desktop/GlpiDocker/glpi_data
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:11.2.2
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: glpi
+      MYSQL_USER: glpi
+      MYSQL_PASSWORD: glpi
+    volumes:
+      - db_data:/home/kali/Desktop/GlpiDocker/dbconfig
+
+volumes:
+  glpi_data:
+  db_data:
